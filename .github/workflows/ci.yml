@@ -61,11 +61,6 @@ jobs:
           labels: |
             report
             automated pr
-          assignees: peter-evans
-          reviewers: peter-evans
-          team-reviewers: |
-            owners
-            maintainers
           draft: false
 #      - name: report image by action
 #        with:
