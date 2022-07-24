@@ -24,8 +24,10 @@ jobs:
         run: |
           export VERSION=$(cat service.yaml)
           echo "VERSION=$(cat service.yaml)" >> $GITHUB_ENV
-          export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
-          docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
+          export CF_IMAGE=$DOCKER_USERNAME/ks-guestbook-demo:$VERSION
+          docker pull gcr.io/heptio-images/ks-guestbook-demo:0.2
+          docker tag gcr.io/heptio-images/ks-guestbook-demo:0.2 $CF_IMAGE
+          docker push $CF_IMAGE
       - name: Checkout csdp-salesdemo_applications
         uses: actions/checkout@v3
         with:
