@@ -64,7 +64,7 @@ jobs:
           title: '[Example] Update report'
           body: |
             Update rollout version
-            - Updated with *today's* date
+            - Updated new version of guestbook
           labels: |
             automated pr
           assignees: ziv-codefresh
