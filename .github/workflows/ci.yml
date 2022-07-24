@@ -22,8 +22,8 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          export VERSION = cat service.yaml
-          export CF_IMAGE = $DOCKER_USERNAME/github-demo:$VERSION
+          export VERSION=cat service.yaml
+          export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
           docker build . --file Dockerfile --tag $VERSION && docker push $CF_IMAGE
 #      - name: report image by action
 #        with:
