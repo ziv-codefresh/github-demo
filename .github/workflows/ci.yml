@@ -23,6 +23,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           export VERSION=$(cat service.yaml)
+          echo "VERSION=$(cat service.yaml)" >> $GITHUB_ENV
           export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
           docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
       - name: Checkout csdp-salesdemo_applications
@@ -35,6 +36,7 @@ jobs:
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod a+x /usr/local/bin/yq
           yq --version
+          echo "${{ env.VERSION }}"
           ls
           cd guestbook-sales-rollout
           VERSION=gcr.io/heptio-images/ks-guestbook-demo:5 yq -i '.spec.template.spec.containers.[0].image = strenv(VERSION)' rollout.yaml
