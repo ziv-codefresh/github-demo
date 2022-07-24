@@ -25,12 +25,13 @@ jobs:
           export VERSION=$(cat service.yaml)
           echo "VERSION=$(cat service.yaml)" >> $GITHUB_ENV
           export CF_IMAGE=$DOCKER_USERNAME/ks-guestbook-demo:$VERSION
-          docker pull gcr.io/heptio-images/ks-guestbook-demo:0.2
-          docker tag gcr.io/heptio-images/ks-guestbook-demo:0.2 $CF_IMAGE
-          docker push $CF_IMAGE
+#          docker pull gcr.io/heptio-images/ks-guestbook-demo:0.2
+#          docker tag gcr.io/heptio-images/ks-guestbook-demo:0.2 $CF_IMAGE
+          docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
+#          docker push $CF_IMAGE
       - name: report image by action
         with:
-          CF_IMAGE: zivcodefresh/ks-guestbook-demo:0.0.4
+          CF_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/ks-guestbook-demo:${{ env.VERSION }}
           CF_HOST: "https://mr-59d37837920f8900018a6183-eb90894.cf-cd.com"
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
