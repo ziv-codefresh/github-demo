@@ -30,7 +30,7 @@ jobs:
           docker push $CF_IMAGE
       - name: report image
         with:
-          CF_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/ks-guestbook-demo:${{ env.VERSION }}
+          CF_IMAGE: zivcodefresh/ks-guestbook-demo:${{ env.VERSION }}
           CF_HOST: "https://mr-59d37837920f8900018a6183-eb90894.cf-cd.com"
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
