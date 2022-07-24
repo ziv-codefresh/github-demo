@@ -36,9 +36,8 @@ jobs:
           sudo chmod a+x /usr/local/bin/yq
           yq --version
           ls
-          export VERSION=5
           cd guestbook-sales-rollout
-          yq -i '.spec.template.spec.containers.[0].image = "gcr.io/heptio-images/ks-guestbook-demo:strenv(VERSION)"' rollout.yaml
+          VERSION=5 yq -i '.spec.template.spec.containers.[0].image = "gcr.io/heptio-images/ks-guestbook-demo:strenv(VERSION)"' rollout.yaml
           cat rollout.yaml
 #      - name: report image by action
 #        with:
