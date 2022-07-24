@@ -50,7 +50,6 @@ jobs:
           sudo chmod a+x /usr/local/bin/yq
           IMAGE=$DOCKER_USERNAME/${{ github.event.repository.name }}:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' hello-world/deployment.yaml
       - name: Create Pull Request
-        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.PAT }}
