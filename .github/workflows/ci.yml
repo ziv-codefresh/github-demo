@@ -32,7 +32,9 @@ jobs:
           path: .
       - name: Update version and create a pull request
         run: |
-          apk add yq
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod a+x /usr/local/bin/yq
+          yq --version
           cd guestbook-sales-rollout
           cat rollout.yaml
 #      - name: report image by action
