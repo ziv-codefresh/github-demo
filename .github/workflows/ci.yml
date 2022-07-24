@@ -32,7 +32,8 @@ jobs:
           path: .
       - name: Update version and create a pull request
         run: |
-          cd guestbook-sales-rollout/guestbook-sales-rollout
+          ls
+          cd guestbook-sales-rollout
           ls
 #      - name: report image by action
 #        with:
