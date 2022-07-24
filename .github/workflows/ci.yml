@@ -32,9 +32,8 @@ jobs:
           path: .
       - name: Update version and create a pull request
         run: |
-          ls
           cd guestbook-sales-rollout
-          ls
+          cat rollout.yaml
 #      - name: report image by action
 #        with:
 #          CF_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/csdp-report-image-github-action:example-reported-image
