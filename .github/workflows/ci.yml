@@ -32,6 +32,7 @@ jobs:
           path: .
       - name: Update version and create a pull request
         run: |
+          apk add yq
           cd guestbook-sales-rollout
           cat rollout.yaml
 #      - name: report image by action
