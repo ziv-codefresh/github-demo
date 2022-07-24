@@ -37,7 +37,7 @@ jobs:
           yq --version
           ls
           cd guestbook-sales-rollout
-          VERSION=5 yq -i '.spec.template.spec.containers.[0].image = "gcr.io/heptio-images/ks-guestbook-demo:strenv(VERSION)"' rollout.yaml
+          VERSION=gcr.io/heptio-images/ks-guestbook-demo:5 yq -i '.spec.template.spec.containers.[0].image = strenv(VERSION)' rollout.yaml
           cat rollout.yaml
 #      - name: report image by action
 #        with:
