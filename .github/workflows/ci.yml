@@ -61,6 +61,8 @@ jobs:
           labels: |
             report
             automated pr
+          assignees: ziv-codefresh
+          reviewers: ziv-codefresh
           draft: false
 #      - name: report image by action
 #        with:
