@@ -1,0 +1,11 @@
+{
+  "name": "github-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ziv-codefresh/github-demo.git",
+  "author": "ziv-codefresh <ziv@codefresh.io>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

@@ -24,13 +24,11 @@ jobs:
         run: |
           export VERSION=$(cat service.yaml)
           echo "VERSION=$(cat service.yaml)" >> $GITHUB_ENV
-          export CF_IMAGE=$DOCKER_USERNAME/ks-guestbook-demo:$VERSION
-          docker pull gcr.io/heptio-images/ks-guestbook-demo:0.2
-          docker tag gcr.io/heptio-images/ks-guestbook-demo:0.2 $CF_IMAGE
-          docker push $CF_IMAGE
-      - name: report image
+          export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
+          docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
+      - name: Report image
         with:
-          CF_IMAGE: zivcodefresh/ks-guestbook-demo:${{ env.VERSION }}
+          CF_IMAGE: zivcodefresh/github-demo:${{ env.VERSION }}
           CF_HOST: "https://mr-59d37837920f8900018a6183-eb90894.cf-cd.com"
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
@@ -44,24 +42,24 @@ jobs:
         with:
           repository: ziv-codefresh/csdp-salesdemo_applications
           path: .
-      - name: Update version and create a pull request
+      - name: Update application version
         run: |
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod a+x /usr/local/bin/yq
-          cd guestbook-sales-rollout
-          IMAGE=zivcodefresh/ks-guestbook-demo:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' rollout.yaml
+          cd hello-world
+          IMAGE=zivcodefresh/github-demo:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' deployment.yaml
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.PAT }}
-          commit-message: Update report
+          commit-message: Update version
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
           branch: update-guestbook-version
           delete-branch: true
-          title: '[Example] Update report'
+          title: 'Update application version'
           body: |
             Update rollout version
             - Updated new version of guestbook
