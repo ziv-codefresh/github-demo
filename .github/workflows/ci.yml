@@ -46,8 +46,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          IMAGE=$DOCKER_USERNAME/${{ github.event.repository.name }}:${{ env.VERSION }} 
-          yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' hello-world/deployment.yaml
+          IMAGE=$DOCKER_USERNAME/${{ github.event.repository.name }}:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' hello-world/deployment.yaml
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
