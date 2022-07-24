@@ -46,8 +46,6 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod a+x /usr/local/bin/yq
           IMAGE=$DOCKER_USERNAME/${{ github.event.repository.name }}:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' hello-world/deployment.yaml
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
