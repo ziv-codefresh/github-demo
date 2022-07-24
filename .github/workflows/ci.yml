@@ -24,11 +24,11 @@ jobs:
         run: |
           export VERSION=$(cat service.yaml)
           echo "VERSION=$(cat service.yaml)" >> $GITHUB_ENV
-          export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
+          export CF_IMAGE=$DOCKER_USERNAME/${{ github.event.repository.name }}:$VERSION
           docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
       - name: Report image
         with:
-          CF_IMAGE: zivcodefresh/github-demo:${{ env.VERSION }}
+          CF_IMAGE: zivcodefresh/${{ github.event.repository.name }}:${{ env.VERSION }}
           CF_HOST: "https://mr-59d37837920f8900018a6183-eb90894.cf-cd.com"
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
@@ -47,7 +47,7 @@ jobs:
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod a+x /usr/local/bin/yq
           cd hello-world
-          IMAGE=zivcodefresh/github-demo:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' deployment.yaml
+          IMAGE=zivcodefresh/${{ github.event.repository.name }}:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' deployment.yaml
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
