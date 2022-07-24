@@ -25,7 +25,7 @@ jobs:
           ls
           export VERSION=5
           export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
-          docker build . --file Dockerfile --tag $VERSION && docker push $CF_IMAGE
+          docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
 #      - name: report image by action
 #        with:
 #          CF_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/csdp-report-image-github-action:example-reported-image
