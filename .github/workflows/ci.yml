@@ -25,11 +25,14 @@ jobs:
           export VERSION=$(cat service.yaml)
           export CF_IMAGE=$DOCKER_USERNAME/github-demo:$VERSION
           docker build . --file Dockerfile --tag $CF_IMAGE && docker push $CF_IMAGE
-      - name: Checkout tools repo
+      - name: Checkout csdp-salesdemo_applications
         uses: actions/checkout@v3
         with:
           repository: ziv-codefresh/csdp-salesdemo_applications
           path: .
+      - name: Update version and create a pull request
+        run: |
+          ls
 #      - name: report image by action
 #        with:
 #          CF_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/csdp-report-image-github-action:example-reported-image
