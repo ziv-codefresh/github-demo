@@ -35,7 +35,9 @@ jobs:
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod a+x /usr/local/bin/yq
           yq --version
+          export VERSION=$(cat service.yaml)
           cd guestbook-sales-rollout
+          yq -i '.spec.template.spec.containers.[0].image = "gcr.io/heptio-images/ks-guestbook-demo:$VERSION"' rollout.yaml
           cat rollout.yaml
 #      - name: report image by action
 #        with:
