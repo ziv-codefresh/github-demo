@@ -36,7 +36,7 @@ jobs:
           sudo chmod a+x /usr/local/bin/yq
           yq --version
           ls
-          export VERSION=$(cat service.yaml)
+          export VERSION=5
           cd guestbook-sales-rollout
           yq -i '.spec.template.spec.containers.[0].image = "gcr.io/heptio-images/ks-guestbook-demo:$VERSION"' rollout.yaml
           cat rollout.yaml
