@@ -41,14 +41,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: ziv-codefresh/csdp-salesdemo_applications
-          path: .
+          path: hello-world
       - name: Update application version
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod a+x /usr/local/bin/yq
-          cd hello-world
           IMAGE=$DOCKER_USERNAME/${{ github.event.repository.name }}:${{ env.VERSION }} yq -i '.spec.template.spec.containers.[0].image = strenv(IMAGE)' deployment.yaml
       - name: Create Pull Request
         id: cpr
@@ -59,7 +58,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: update-guestbook-version
+          branch: update-application-version
           delete-branch: true
           title: 'Update application version'
           body: |
