@@ -1,11 +1,11 @@
 name: Github-action-demo
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types:
-      - closed
+#     types:
+#       - closed
 jobs:
   build:
     environment:
