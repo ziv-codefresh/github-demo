@@ -34,7 +34,7 @@ jobs:
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
           CF_JIRA_INTEGRATION: "jira"
           CF_GITHUB_TOKEN: ${{ secrets.PAT }}
-          CF_JIRA_MESSAGE: "${{ github.event.head_commit.message }}"
+          CF_JIRA_MESSAGE: "${{ github.event.head.ref }}"
           CF_GIT_BRNACH: "${{ github.event.head.ref }}"
           CF_JIRA_PROJECT_PREFIX: "CR"
         uses: codefresh-io/codefresh-report-image@latest
