@@ -35,7 +35,7 @@ jobs:
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
           CF_JIRA_INTEGRATION: "jira"
           CF_GITHUB_TOKEN: ${{ secrets.PAT }}
-          CF_JIRA_MESSAGE: "${{ github.event.head_commit.message }}"
+          CF_JIRA_MESSAGE: "CR-1234"
           CF_JIRA_PROJECT_PREFIX: "CR"
         uses: codefresh-io/codefresh-report-image@latest
       - name: Checkout csdp-salesdemo_applications
