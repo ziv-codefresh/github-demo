@@ -35,7 +35,7 @@ jobs:
           CF_JIRA_INTEGRATION: "jira"
           CF_GITHUB_TOKEN: ${{ secrets.PAT }}
           CF_JIRA_MESSAGE: "${{ github.event.pull_request.head.ref }}"
-          CF_GIT_BRNACH: "${{ github.event.pull_request.head.ref }}"
+          CF_GIT_BRANCH: "${{ github.event.pull_request.head.ref }}"
           CF_JIRA_PROJECT_PREFIX: "CR"
         uses: codefresh-io/codefresh-report-image@latest
       - name: Checkout csdp-salesdemo_applications
