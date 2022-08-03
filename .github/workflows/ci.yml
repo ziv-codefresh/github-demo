@@ -34,7 +34,7 @@ jobs:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_CONTAINER_REGISTRY_INTEGRATION: "docker"
           CF_JIRA_INTEGRATION: "jira"
-          CF_GITHUB_TOKEN: ${{ secrets.PAT }}
+          CF_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CF_JIRA_MESSAGE: "CR-1234"
           CF_GIT_BRANCH: "CR-1234"
           CF_JIRA_PROJECT_PREFIX: "CR"
